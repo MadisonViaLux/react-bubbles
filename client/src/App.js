@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route } from "react-router-dom";
 
 import Login from "./components/Login";
@@ -6,7 +6,7 @@ import BubblePage from './components/BubblePage'
 import "./styles.scss";
 
 function App() {
-  const [colorList, setColorList] = useState([]);
+  // const [colorList, setColorList] = useState([]);
   return (
       <div className="App">
         <Route exact path="/" component={Login} />
