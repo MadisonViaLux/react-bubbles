@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {axiosAuth} from "../utils/axiosAuth";
 
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, props, getData }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
@@ -23,18 +23,23 @@ const ColorList = ({ colors, updateColors }) => {
     // where is is saved right now?
   };
 
+
+
+console.log(props)
+
   const deleteColor = color => {
     // make a delete request to delete this color
-    color.preventDefault();
-    axios
-      .delete(`http://localhost:5000/`)
-      .then(res => {
-        color.updateItems(res.data);
-        color.history.push('/');
+    // color.preventDefault();
+    console.log()
+    axiosAuth()
+      .delete(`http://localhost:5000/api/colors/${color.id}`)
+      .then(res => { console.log(res.data)
+        // color.updateItems(res.data);
+        props.history.push('/api/colors', getData);
       })
       .catch(err => console.log(err.response));
   };
-  
+ 
 
   return (
     <div className="colors-wrap">
