@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import {axiosAuth} from "../utils/axiosAuth";
 
 
 class Login extends React.Component {
@@ -22,25 +22,18 @@ class Login extends React.Component {
     });
   };
 
-
-
-
   login = event => {
     event.preventDefault();
-    axios
-      .post("http:localhost:5000/api/login", this.state.creds)
+    axiosAuth()
+      .post("/login", this.state.creds)
       .then(res => {
         localStorage.setItem("token", res.data.payload);
+        this.props.history.push('/api/colors');
       })
       .catch(err => {
-        console.log(err.response);
+        console.log(err);
       });
   };
-
-
-
-
-
 
   render() {
     return (
